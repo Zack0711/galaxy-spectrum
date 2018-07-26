@@ -9,3 +9,33 @@ $fa-font-path: "~font-awesome/fonts";
 
 @import "_utilities.scss";
 @import "_basic.scss";
+
+.value-controller{
+  position: relative;
+
+  .value-bg{
+    width: 100%;    
+    height: 1rem;
+    position: relative;
+    background-color: lightgray;
+    display: block;
+
+  }
+  .value-bar{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+  }
+
+  .drag-btn{
+    position: relative;
+    .fa{
+      transform: translate(-50%, 0);
+    }
+  }
+
+}
