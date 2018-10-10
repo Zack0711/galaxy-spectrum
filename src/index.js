@@ -13,7 +13,7 @@ import {
   getCSVData,
 } from './utilities';
 
-const baseUrl = '/csv_data/'
+const baseUrl = './csv_data/'
 
 let selectedName
 
