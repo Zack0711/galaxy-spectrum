@@ -1,11 +1,13 @@
 import * as d3 from "d3";
 
-const margin = {top: 20, right: 20, bottom: 30, left: 50};
+const margin = {top: 20, right: 20, bottom: 30, left: 150};
 
 class SpectrumChart {
   constructor(element) {
     this.galaxyData = [];
     this.radiationData = [];
+    this.elementData = [];
+    this.axisReference;
 
     this.svg = d3.select(element);
     this.contentWidth = this.svg.attr('width') - margin.left - margin.right;
@@ -20,12 +22,14 @@ class SpectrumChart {
       .y(d => this.yRange(d.energyDensity));
 
     this.updateGalaxyChart = this.updateGalaxyChart.bind(this);
+    this.updataElementChart = this.updataElementChart.bind(this);
 
     this.xAxis = this.g.append('g');
     this.yAxis = this.g.append('g');
 
     this.galaxyChart = this.g.append('path');
     this.radiationChart = this.g.append('path');
+    this.elementChart = this.g.append('path');
 
     this.xAxis.attr('class', 'x-axis')
             .attr('transform', `translate(0,${this.contentHeight})`);
@@ -41,16 +45,33 @@ class SpectrumChart {
 
     this.galaxyChart.attr('class', 'galaxy-data');
     this.radiationChart.attr('class', 'line-data');
+    this.elementChart.attr('class', 'element-data')
+  }
+
+  setAxisReference(data) {
+    this.axisReference = data;
+    this.xRange.domain(d3.extent(this.axisReference, d => d.waveLength ));
+    this.yRange.domain(d3.extent(this.axisReference, d => d.energyDensity ));
+    this.xAxis.call(d3.axisBottom(this.xRange));
+    this.yAxis.call(d3.axisLeft(this.yRange));
   }
 
   updateGalaxyChart(data) {
     this.galaxyData = data;
-    this.xRange.domain(d3.extent(this.galaxyData, d => d.waveLength ));
-    this.yRange.domain(d3.extent(this.galaxyData, d => d.energyDensity ));
+    this.chartRender();
+  }
 
-    this.xAxis.call(d3.axisBottom(this.xRange));
-    this.yAxis.call(d3.axisLeft(this.yRange));
+  updataRadiationChart(data) {
+    this.radiationData = data;
+    this.chartRender();
+  }
 
+  updataElementChart(data) {
+    this.elementData = data;
+    this.chartRender();
+  }
+
+  chartRender() {
     this.galaxyChart.datum(this.galaxyData)
                   .attr('fill', 'none')
                   .attr('stroke', 'red')
@@ -58,10 +79,7 @@ class SpectrumChart {
                   .attr('stroke-linecap', 'round')
                   .attr('stroke-width', 1)
                   .attr('d', this.line);
-  }
 
-  updataRadiationChart(data) {
-    this.radiationData = data;
     this.radiationChart.datum(this.radiationData)
                   .attr('fill', 'none')
                   .attr('stroke', 'steelblue')
@@ -69,6 +87,15 @@ class SpectrumChart {
                   .attr('stroke-linecap', 'round')
                   .attr('stroke-width', 1)
                   .attr('d', this.line);
+
+    this.elementChart.datum(this.elementData)
+                  .attr('fill', 'none')
+                  .attr('stroke', 'grey')
+                  .attr('stroke-linejoin', 'round')
+                  .attr('stroke-linecap', 'round')
+                  .attr('stroke-width', 1)
+                  .attr('d', this.line);
   }
+
 }
 export default SpectrumChart;

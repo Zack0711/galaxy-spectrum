@@ -1,4 +1,4 @@
-const h = 6.626069934 * Math.pow(10, -32);
+const h = 6.626069934 * Math.pow(10, -34);
 const k = 1.38064852 * Math.pow(10, -23);
 const c = 2.99792458 * Math.pow(10, 8);
 
