@@ -82,6 +82,8 @@ const btnFlux = document.querySelector('.btn-flux');
 const btnBestFit = document.querySelector('.btn-best-fit');
 const btnCorrection = document.querySelector('.btn-correction');
 
+let currentGalaxyData = [];
+
 let chartMode = 0;
 let needCorrect = false;
 
@@ -157,6 +159,7 @@ const updateData = (progressVal) => {
   if(temperature && galaxyChart){
     const energyData = genEnergyDensityDataSet(temperature.toFixed(2))
     galaxyChart.setAxisReference(energyData);
+//    galaxyChart.setAxisReference(currentGalaxyData);
     galaxyChart.updataRadiationChart(energyData);
   }
 }
@@ -174,26 +177,10 @@ const updateGalaxyChart = data => {
       galaxyData.push({energyDensity: parseInt(d[dataKey])*Math.pow(10, 11)*dataCorrection, waveLength: parseInt(d.Wavelength)*Math.pow(10, -10)});
     }
   })
+  currentGalaxyData = galaxyData;
+//  galaxyChart.setAxisReference(currentGalaxyData);
   galaxyChart.updateGalaxyChart(galaxyData);
 }
-
-/*
-const updataElementChart = data => {
-  const elementData = [];
-  data.forEach(d => {
-    if(d['"Ritz Wavelength Vac (nm)"']){
-      elementData.push({waveLength: Number(d['"Ritz Wavelength Vac (nm)"'])/1000000000, energyDensity: Number(d['"Aki (s-1)"'])*100})
-    }
-  })
-  console.log(elementData)
-  galaxyChart.updataElementChart(elementData);
-}
-*/
-
-//getCSVData('/csv_data/csvSpectrum_2917.csv', updateGalaxyChart);
-//getCSVData('/csv_data/H.csv', updataElementChart);
-
-
 
 csvDataArray.forEach(d => {
   const optionItem = document.createElement("option");
@@ -201,6 +188,24 @@ csvDataArray.forEach(d => {
   optionItem.innerHTML = d.label;
   dataSelector.appendChild(optionItem);
 })
+
 switchMode(0);
 selectedName = dataSelector.value;
 setSelectedData(csvDataSet[dataSelector.value]);
+
+getCSVData(`${baseUrl}elem-H.csv`, csvData => {
+  const elementData = [];
+  let maxIntensity = 0;
+
+  csvData.forEach((d,i) => {
+    const energyDensity = d.energyDensity*Math.pow(10, 15);
+    const waveLength = d.waveLength.replace(' ', '')*Math.pow(10, -10);
+
+    if(energyDensity > maxIntensity) maxIntensity = energyDensity;
+
+    elementData.push({energyDensity, waveLength});
+  })
+  console.log(maxIntensity)
+  galaxyChart.updataElementChart(elementData);
+
+});
