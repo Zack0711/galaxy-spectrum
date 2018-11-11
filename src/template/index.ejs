@@ -11,12 +11,11 @@
         <div class="container p-3">
           <div class="form-group row align-items-center">
             <div class="px-3">Plate ID</div>
-            <select class="data-selector form-control col-2" id="exampleFormControlSelect1">
+            <select class="data-selector form-control col-2">
             </select>
             <div class="col-4">
               <button class="btn btn-outline-primary btn-flux">Flux</button>
               <button class="btn btn-outline-primary btn-best-fit">Best Fix</button>
-              <button class="btn btn-outline-success btn-correction">Correction</button>
             </div>
             <div class="col row align-items-center">
               <div class="data-info px-3"></div>
@@ -35,6 +34,12 @@
               <div id="temperature-controller" class="value-controller"></div>
               <label class="text-t"></label>              
             </div>
+          </div>
+          <div class="form-group row align-items-center">
+            <div class="px-3">Element</div>
+            <select class="element-selector form-control col-1">
+            </select>
+            <button class="ml-3 btn btn-outline-success btn-focus">Focus on galaxy spectrum</button>            
           </div>
         </div>
       </section>

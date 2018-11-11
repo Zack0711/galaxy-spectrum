@@ -7,9 +7,10 @@ const countEnergyDensity = (waveLength, T) => {
   return I;
 }
 
-const genEnergyDensityDataSet = (T, start = 0, end = 0.0005, num = 200) => {
-  const limitW = (h * c ) / ( k * T )
-  const interval = (limitW - start) / num;
+const genEnergyDensityDataSet = (T, start = 0, end = 0.000002, num = 200) => {
+  const limitW = (h * c ) / ( k * T );
+  //const interval = (limitW - start) / num;
+  const interval = (end - start) / num;
   let data = [];
   let waveLength = start + interval;
 
