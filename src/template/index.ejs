@@ -1,48 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Galaxy Spectrum</title>
+    <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>光譜學習軟體</title>
   </head>
   <body>
-    <div class="main">
-      <section>
-        <div class="container p-3">
-          <div class="form-group row align-items-center">
-            <div class="px-3">Plate ID</div>
-            <select class="data-selector form-control col-2">
-            </select>
-            <div class="col-4">
-              <button class="btn btn-outline-primary btn-flux">Flux</button>
-              <button class="btn btn-outline-primary btn-best-fit">Best Fix</button>
-            </div>
-            <div class="col row align-items-center">
-              <div class="data-info px-3"></div>
-              <a class="btn btn-info data-reference" target="blank" href="#">Reference</a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div class="container">
-          <div class="p-3 mx-auto">
-            <svg id="spectrum-chart" width="960" height="500"></svg>          
-          </div>
-          <div class="p-3 row justify-content-center">
-            <div class="col-6">
-              <div id="temperature-controller" class="value-controller"></div>
-              <label class="text-t"></label>              
-            </div>
-          </div>
-          <div class="form-group row align-items-center">
-            <div class="px-3">Element</div>
-            <select class="element-selector form-control col-1">
-            </select>
-            <button class="ml-3 btn btn-outline-success btn-focus">Focus on galaxy spectrum</button>            
-          </div>
-        </div>
-      </section>
-    </div>
+    <div id="root"></div>
   </body>
 </html>

@@ -1,0 +1,26 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "useBuiltIns": "entry",
+        "corejs": 3,
+        "targets": {
+          "browsers": [">0.25%", "not dead"]
+        }
+      }
+    ],
+    [
+      "@babel/preset-react",
+      {
+        "useBuiltIns": true,
+      }
+    ],
+    ["@babel/preset-flow"]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-class-properties"],
+    ["@babel/plugin-transform-runtime"]
+  ]
+}

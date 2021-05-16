@@ -1,0 +1,87 @@
+{
+  "popupModal": {
+    "start": {
+      "title": "Steer challenge",
+      "titleIcon": "🚢",
+      "content": "Steer the big ship through Suez Canal.",
+      "startBtn": "Start"
+    },
+    "collision": {
+      "title": "Collision!!",
+      "titleIcon": "⛑",
+      "content": "Ops, the digger guy has work to do.",
+      "startBtn": "Try again",
+      "shareInfo": "Ask friend to help",
+      "shareContent": "I spent $t(minutes, {\"count\": {{count}} }), $t(seconds, {\"count\": {{second}} }) and traveled {{distance}} km but still failed steering through the Suez Canal 😱. Who can handle it ? For the world economy !",
+      "shareContent_interval": "(0)[I spent $t(seconds, {\"count\": {{second}} }) and traveled {{distance}} km but still failed steering through the Suez Canal 😱. Who can handle it ? For the world economy !];(1-inf)[I spent $t(minutes, {\"count\": {{count}} }), $t(seconds, {\"count\": {{second}} }) and traveled {{distance}} km but still failed steering through the Suez Canal 😱. Who can handle it ? For the world economy !];"
+    },
+    "arrive": {
+      "title": "Congratulations!!",
+      "titleIcon": "🎉",
+      "content": "Wow, you just save the world economy!!",
+      "startBtn": "Play again",
+      "shareInfo": "Invite friend to challenge your score.",
+      "shareContent": "I just save the world economy in $t(minutes, {\"count\": {{count}} }), $t(seconds, {\"count\": {{second}} }) and traveled {{distance}}km 😎, who can beat me ?",
+      "shareContent_interval": "(0)[I just save the world economy in $t(seconds, {\"count\": {{second}} }) and traveled {{distance}}km 😎, who can beat me ?];(1-inf)[I just save the world economy in $t(minutes, {\"count\": {{count}} }), $t(seconds, {\"count\": {{second}} }) and traveled {{distance}}km 😎, who can beat me ?];"
+    },
+    "social": {
+      "content": "Contact"
+    },
+    "source": "Source: ",
+    "record": "{{min}}:{{second}}, {{distance}}km",
+    "record_interval": "(0)[$t(seconds, {\"count\": {{second}} }), {{distance}}km];",
+    "topRankBtn": "Top Rank"
+  },
+  "control": {
+    "title": "Controls",
+    "rudderAngle": "Rudder Angle",
+    "enginePower": "Engine Power",
+    "note": "Use your keyboards",
+    "musicOn": "On",
+    "musicOff": "Off"
+  },
+  "info": {
+    "wind": "Wind",
+    "windUnit": "kph",
+    "power": "Engine Power",
+    "elapsedTime": "Elapsed Time",
+    "travelDistance": "Travel Distance",
+    "distanceUnit": "km"
+  },
+  "countryMenu": {
+    "searchPlaceholder": "Search"
+  },
+  "userInfoPanel": {
+    "title": "You just made it!!",
+    "nameLabel": "Name",
+    "description": "Submit your score to see how good you are.",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "gameInfoPanel": {
+    "description": "This is a non-scientific simulator game and modified from an interactive page made by CNN for entertainment purpose. It needs a group of people to running a real container ship and need take many factors into consideration.",
+    "manual_1": "The game has 2 mode, you can press 'NORMAL/HARD' to switch it.",
+    "manual_2": "'Top Rank' shows the top 25 list which pass the game with the fastest time.",
+    "manual_3": "Use buttons or arrow to control the ship."
+  },
+  "rankPanel": {
+    "title": "Top Rank ",
+    "yourRank": "Your Rank: "
+  },
+  "mode": {
+    "normal": "Normal",
+    "hard": "Hard"
+  },
+  "windWarning": "Beware, wind has changed!!",
+  "stuckSpotInfo": "Attention, you are going to pass through the stuck spot.",
+  "time": "$t(minutes, {\"count\": {{count}} }), $t(seconds, {\"count\": {{second}} })",
+  "time_interval": "(0)[$t(seconds, {\"count\": {{second}} })];(1-inf)[$t(minutes, {\"count\": {{count}} }), $t(seconds, {\"count\": {{second}} })];",
+  "time_plural": "$t(minutes, {\"count\": {{count}} }), $t(seconds, {\"count\": {{second}} })",
+  "minutes": "{{count}} min",
+  "minutes_plural": "{{count}} mins",
+  "seconds": "{{count}} sec",
+  "seconds_plural": "{{count}} secs",
+  "button": {
+    "close": "Close"    
+  }
+}
