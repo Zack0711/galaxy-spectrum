@@ -11,6 +11,13 @@ import {
   getViewedID,
 } from '../selectors/spectrum'
 
+export const init = async (dispatch, getState) => {
+  const list = getList(getState())
+  if (!list.length) {
+    await dispatch(fetchSpectrumList)
+  }
+}
+
 export const START_FETCHING = 'START_FETCHING'
 export const STOP_FETCHING = 'STOP_FETCHING'
 const fetchData = async (dispatch, fetch) => {
@@ -34,9 +41,6 @@ export const fetchDefaultAnswer = async (dispatch, getState) => {
 }
 
 export const saveDefaultAnswer = values => async (dispatch, getState) => {
-  /*
-  const surfaceTemperature = '表面溫度為：{{t}} [br] Each spectral type is divided into 10 subclasses, A0, A1, A2, ...A9 etc. The spectral types and sub-classes represent a temperature sequence, from hotter (O stars) to cooler (M stars), and from hotter (subclass 0) to cooler (subclass 9).'
-  */
   const rsp = await fetchData(dispatch, { 
     method: 'updateDefaultAnswer', 
     config:{ 
@@ -58,9 +62,13 @@ export const UPDATE_SPECTRUM_LIST = 'UPDATE_SPECTRUM_LIST'
 export const fetchSpectrumList = async (dispatch, getState) => {
 
   const rsp = await fetchData(dispatch, { method: 'getAllSpectrums', config:{}})
+  const list = rsp.data
+  const randomIndex = Math.floor(Math.random()*list.length)
+
+  dispatch(updateViewedID(list[randomIndex].id))
   dispatch({
     type: UPDATE_SPECTRUM_LIST,
-    list: rsp.data,
+    list,
   })
 }
 
@@ -98,40 +106,29 @@ export const updateViewedSpectrum = async (dispatch, getState) => {
     data: null,
   })
 
-  let id = getViewedID(getState())
+  const id = getViewedID(getState())
 
-  if(!id){
-    let list = getList(getState())
-
-    if(!list.length){
-      //await dispatch(saveDefaultAnswer)
-      await dispatch(fetchDefaultAnswer)
-      await dispatch(fetchSpectrumList)
-      list = getList(getState())
+  if(id) {
+    const rsp = await fetchData(dispatch, { method: 'getSpectrum', config:{id}})
+    const spectrum = {
+      id: rsp.data.id,
+      subclass: rsp.data.subclass,
+      csvUrl: rsp.data.csv_link,
+      reference: rsp.data.reference,
+      redshift: rsp.data.redshift,
+      surfaceTemperature: rsp.data.surface_temperature,
+      elementComposition: rsp.data.element_composition,
+      data: csvParse(rsp.data.data),
     }
 
-    const randomIndex = Math.floor(Math.random()*list.length)
-    id = list[randomIndex].id
+    dispatch({
+      type: UPDATE_VIEWED_SPECTRUM,
+      data: {
+        ...spectrum
+      },
+    })
   }
 
-  const rsp = await fetchData(dispatch, { method: 'getSpectrum', config:{id}})
-  const spectrum = {
-    id: rsp.data.id,
-    subclass: rsp.data.subclass,
-    csvUrl: rsp.data.csv_link,
-    reference: rsp.data.reference,
-    redshift: rsp.data.redshift,
-    surfaceTemperature: rsp.data.surface_temperature,
-    elementComposition: rsp.data.element_composition,
-    data: csvParse(rsp.data.data),
-  }
-
-  dispatch({
-    type: UPDATE_VIEWED_SPECTRUM,
-    data: {
-      ...spectrum
-    },
-  })
 }
 
 export const UPDATE_VIEWED_ID = 'UPDATE_VIEWED_ID'
@@ -139,23 +136,6 @@ export const updateViewedID = viewedID => ({
   type: UPDATE_VIEWED_ID,
   viewedID,  
 })
-
-export const randomPickupID = async (dispatch, getState) => {
-  const id = getViewedID(getState())
-  if(!id){
-    let list = getList(getState())
-
-    if(!list.length){
-      await dispatch(fetchDefaultAnswer)
-      await dispatch(fetchSpectrumList)
-      list = getList(getState())
-    }
-
-    const randomIndex = Math.floor(Math.random()*list.length)
-    dispatch(updateViewedID(list[randomIndex].id))
-  }
-}
-
 
 export const OPEN_ADD_DIALOG = 'OPEN_ADD_DIALOG'
 export const openAddDialog = () => ({ type: OPEN_ADD_DIALOG})

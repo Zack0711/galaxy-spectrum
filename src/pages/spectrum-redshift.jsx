@@ -40,10 +40,6 @@ import {
   getDefaultAnswer,
 } from '../selectors/spectrum'
 
-import {
-  updateViewedSpectrum,
-} from '../actions'
-
 import ChartWrapper from '../components/chart-wrapper'
 import Chart from '../components/chart/redshift.jsx'
 import Progress from '../components/progress/index.jsx'
@@ -121,8 +117,6 @@ const SpectrumRedshift= () => {
   const isFetching = useSelector(getIsFetching)
 
   useEffect(() => {
-    dispatch(updateViewedSpectrum)
-
     return () => {
       setElementData({ bar: [], option: { list: [], data: {}}})
       setChartData({ list: [], elements: [], maxY: 0, limitX: [0, 20000] })

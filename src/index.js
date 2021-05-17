@@ -1,5 +1,5 @@
-import React from 'react'
-import { Provider } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { Provider, useSelector, useDispatch } from 'react-redux'
 import ReactDOM from 'react-dom'
 import {
   HashRouter as Router,
@@ -16,8 +16,34 @@ import SpectrumTemperature from './pages/spectrum-temperature.jsx'
 import SpectrumComposition from './pages/spectrum-composition.jsx'
 import SpectrumRedshift from './pages/spectrum-redshift.jsx'
 
-const App = () => (
-  <Provider store={store}>
+import {
+  init,
+  updateViewedSpectrum,
+} from './actions'
+
+import {
+  getViewed,
+  getViewedID,
+} from './selectors/spectrum'
+
+const GalaxySpectrum = () => {
+
+  const dispatch = useDispatch()
+
+  const data = useSelector(getViewed)
+  const id = useSelector(getViewedID)
+
+  useEffect(() => {
+    if (id) {
+      if (!data.id || data.id !== id) {
+        dispatch(updateViewedSpectrum)
+      }
+    } else {
+      dispatch(init)
+    }
+  }, [id])
+
+  return (
     <Router>
       <CssBaseline/>
       <Switch>
@@ -27,6 +53,12 @@ const App = () => (
         <Route exact path="/spectrum-redshift" children={<SpectrumRedshift />} />
       </Switch>
     </Router>
+  )
+}
+
+const App = () => (
+  <Provider store={store}>
+    <GalaxySpectrum />
   </Provider>
 )
 

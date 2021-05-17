@@ -35,7 +35,6 @@ import {
 import Progress from '../components/progress/index.jsx'
 
 import {
-  randomPickupID,
   updateViewedID,
 } from '../actions'
 
@@ -109,11 +108,6 @@ const Landing = () => {
   const list = useSelector(getList)
 
   const [listOpen, setListOpen] = useState(false)
-
-  useEffect(() => {
-    console.log('XD')
-    dispatch(randomPickupID)
-  }, [])
 
   const handleListButtonClick = () => {
     setListOpen(true)

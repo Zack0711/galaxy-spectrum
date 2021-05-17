@@ -32,10 +32,6 @@ import {
   getDefaultAnswer,
 } from '../selectors/spectrum'
 
-import {
-  updateViewedSpectrum,
-} from '../actions'
-
 import Chart from '../components/chart'
 import ChartWrapper from '../components/chart-wrapper'
 import Progress from '../components/progress/index.jsx'
@@ -106,9 +102,6 @@ const SpectrumTemperature = () => {
   const [open, setOpen] = useState(false)
 
   const isFetching = useSelector(getIsFetching)
-  useEffect(() => {
-    dispatch(updateViewedSpectrum)
-  }, [])
 
   const handleSliderChange = (e, val) => {
     setTemperature(val)
@@ -131,11 +124,6 @@ const SpectrumTemperature = () => {
         { inRange(temperature, t.range) }
       </React.Fragment>
     )
-    /*
-    return surfaceTemperature 
-      ? surfaceTemperature.replace('{{t}}', t.join('-')).split('[br]').map( (d, i) => (<React.Fragment >{d}<br /></React.Fragment>))
-      : ''
-    */
   }
 
   return(

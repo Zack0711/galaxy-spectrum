@@ -38,10 +38,6 @@ import {
   getDefaultAnswer,
 } from '../selectors/spectrum'
 
-import {
-  updateViewedSpectrum,
-} from '../actions'
-
 import ChartWrapper from '../components/chart-wrapper'
 import Chart from '../components/chart/composition.jsx'
 import Progress from '../components/progress/index.jsx'
@@ -158,10 +154,6 @@ const SpectrumComposition= () => {
       setRedshift(redshift)
     }
   }, [spectrumData])
-
-  useEffect(() => {
-    dispatch(updateViewedSpectrum)
-  }, [])
 
   const handleClickOpen = () => {
     setOpen(true);
