@@ -1,7 +1,6 @@
 const getCSVData = async url => {
   const data = await fetch(url).then(rsp => rsp.text().then( txt => txt.split(/\r?\n/)));
   const csvTitle = data.shift().split(',');
-
   return data.map( d => {
     const dArray = d.split(',');
     const dObj = {};

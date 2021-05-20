@@ -221,11 +221,11 @@ const Landing = () => {
       >
         <List>
           {
-            list.map( d => (
+            list.map( id => (
               <ListItem 
-                key={d.id} 
-                onClick={() => selectSpectrun(d.id)} 
-                selected={d.id === viewedID}
+                key={id} 
+                onClick={() => selectSpectrun(id)} 
+                selected={id === viewedID}
                 button
               >
                 <ListItemAvatar>
@@ -234,7 +234,7 @@ const Landing = () => {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={d.id}
+                  primary={id}
                 />
               </ListItem>
             ))

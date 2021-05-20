@@ -14,7 +14,7 @@ const serverApi = {
   },
   getSpectrum: {
     method: 'GET',
-    url: config => `${apiRoot}/spectrum/${config.id}`,
+    url: config => `./data/${config.id}/info.json`,
     headers: {
       'Content-Type': 'application/json',
       mode: 'cors',
@@ -46,7 +46,7 @@ const serverApi = {
   },
   getAllSpectrums: {
     method: 'GET',
-    url: config => `${apiRoot}/spectrum/`,
+    url: config => `./data/list.json`,
     headers: {
       'Content-Type': 'application/json',
       mode: 'cors',
@@ -99,6 +99,7 @@ class HttpService {
       switch (apikey) {
         default:
           fetch(url, requestOption).then((rsp) => {
+            console.log(rsp)
             if (rsp.ok) {
               rsp.json().then((data) => { resolve(data) })
                 .catch(error => console.error(error))
